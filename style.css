@@ -1,0 +1,190 @@
+@import url('https://fonts.googleapis.com/css2?family=SUSE&display=swap');
+:root {
+    --primary-color: #0077b5; /* LinkedIn Blue */
+    --secondary-color: #333;  /* Dark Grey */
+    --light-grey: #f8f9fa;
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "SUSE", sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: var(--light-grey);
+}
+
+main {
+    flex: 1;
+}
+
+.footerMain {
+    background-color: #f8f9fa;
+    text-align: center;
+    width: 100%;
+}
+
+.h-fit {
+    height: fit-content;
+}
+
+.alert {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin-top: 20px;
+    margin-bottom: 0 !important;
+}
+
+.card {
+    animation: fadeIn 1s ease-in-out;
+}
+
+.font-add {
+    font-family: "SUSE", sans-serif;
+}
+
+/* Contact me */
+.contact-container {
+    background: #fff;
+    padding-bottom: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    animation: fadeIn1 1.2s ease-in-out;
+}
+
+.contact-title {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #333;
+    word-wrap: break-word;
+}
+
+.suse-font {
+    font-family: "SUSE", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.color-info {
+    background-color: #cff4fc;
+}
+
+.contact-description {
+    margin-bottom: 2rem;
+    font-size: 1.2rem;
+    color: #777;
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.icon {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    border-radius: 50%;
+    background: #ddd;
+    color: #fff;
+    font-size: 1.5rem;
+    transition: transform 0.3s, background 0.3s;
+}
+
+.icon:hover {
+    transform: scale(1.2);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.facebook {
+    background: #3b5998;
+}
+
+.instagram {
+    background: #e4405f;
+}
+
+.linkedin {
+    background: #0077b5;
+}
+
+.whatsapp {
+    background: #25D366;
+}
+
+.email {
+    background: #ea4335;
+}
+
+@keyframes fadeIn1 {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 768px) {
+    .contact-container {
+        width: 90%;
+        padding: 1rem;
+    }
+
+    .social-icons {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .icon {
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        font-size: 1.2rem;
+    }
+}
+
+/* Calendar Styles */
+#calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    margin-top: 10px;
+  }
+  
+  #calendar div {
+    padding: 10px;
+    background-color: #f1f1f1;
+    text-align: center;
+    cursor: pointer;
+  }
+  
+  #calendar div.attended {
+    background-color: #4caf50;
+    color: white;
+  }
+  
+  .calendar-controls {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  
+  .calendar-controls label {
+    margin-right: 5px;
+  }
+  .weekend {
+    background-color: red; /* Red background for weekends */
+    color: white; /* White text color for better contrast */
+    cursor: not-allowed; /* Prevent marking attendance */
+}
