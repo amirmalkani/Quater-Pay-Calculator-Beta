@@ -18,7 +18,7 @@
         <div class="container-fluid">
             <a class="navbar-brand d-flex align-items-center" href="#">
                 <img src="images/NavIcon.png" alt="Logo" width="30" height="24" class="me-2 ms-4">
-                <span class="ms-2">Quarter Pay Calculator</span>
+                <span class="ms-2 f-8">Quarter Pay Calculator</span>
             </a>
             <!-- Hamburger Button for Mobile -->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -47,18 +47,28 @@
     </nav>
 
 
-    <div class="container mt-5">
-        <div class="calendar-controls">
-            <label for="monthSelect">Select Quater:</label>
-            <select id="monthSelect">
+    <div class="container mt-3">
+        <div id="totalEligibleQuaterpay" class="alert mb-2 ps-2 text-center f-5-special"> Select the Quater to know your QVP %,
+            proior to this Please fill your attendance in <b>Home page</b></div>
+        <div class="container mb-3 d-flex justify-content-center">
+            <!-- <label for="yearSelect" class="form-label f-8">Select Year:</label> -->
+            <select id="yearSelect" class="form-select f-8 text-center w-fit">
+                <option value="2024">2024</option>
+                <option value="2025" disabled>2025</option>
+                <option value="2026" disabled>2026</option>
+            </select>
+        </div>
+        <!-- <div class="calendar-controls">
+            <label for="monthSelect" class="form-label f-8">Select Quater:</label>
+            <select id="monthSelect" class="form-select f-8 text-center">
                 <option value="" disabled selected>Select a Quater</option>
                 <option value="1-3">Jan - Mar</option>
                 <option value="4-6">Apr - June</option>
                 <option value="7-9">July - Sept</option>
                 <option value="10-12">Oct - Dec</option>
             </select>
-            <label for="monthSelect1">Select Month:</label>
-            <select id="monthSelect1">
+            <label for="monthSelect1" class="form-label f-8">Select Month:</label>
+            <select id="monthSelect1" class="form-select f-8 text-center">
                 <option value="" disabled selected>Select Month</option>
                 <option value="0">January</option>
                 <option value="1">February</option>
@@ -73,53 +83,96 @@
                 <option value="10">November</option>
                 <option value="11">December</option>
             </select>
+        </div> -->
 
-            <label for="yearSelect">Select Quarter-Year:</label>
-            <select id="yearSelect">
-                <option value="2024">2024</option>
-                <option value="2025" disabled>2025</option>
-                <option value="2026" disabled>2026</option>
-            </select>
-        </div>
         <!-- Calendar will be displayed here -->
-        <div class="container ">
+        <!-- <div class="container ">
             <div class="row">
-                <!-- <div class="col-sm-4">col-sm-8</div>
-                <div class="col-sm-8">col-sm-4</div> -->
                 <div class="mt-5 col-sm-4">Quater Attendance: <span id="attendanceCount">0</span></div>
                 <div class="mt-5 col-sm-8">Monthly Attendance: <span id="attendanceCount1">0</span></div>
             </div>
-        </div>
-        <div class="container ">
             <div class="row">
-                <!-- <div class="col-sm-4">col-sm-8</div>
-                <div class="col-sm-8">col-sm-4</div> -->
                 <div class="mt-5 col-sm-4">WFO Quaterly % : <span id="WfoQuaterPer"> 0.00 %</span></div>
                 <div class="mt-5 col-sm-8">WFO monthly % : <span id="WhoMonthPer"> 0.00 %</span></div>
             </div>
-        </div>
+        </div> -->
 
+        <div class="d-flex justify-content-center">
+
+            <div class="sweet-box">
+                <h2 class="text-center f-8-special">WFO status</h2>
+                <label for="monthSelect" class="form-label f-8">Select Quater:</label>
+                <select id="monthSelect" class="form-select f-8 text-center">
+                    <option value="" disabled selected>Select a Quater</option>
+                    <option value="1-3">Jan - Mar</option>
+                    <option value="4-6">Apr - June</option>
+                    <option value="7-9">July - Sept</option>
+                    <option value="10-12">Oct - Dec</option>
+                </select>
+
+                <p class="f-5-special mt-2">Here are your results:</p>
+                <ul>
+                    <li>
+                        <div class="f-8">Quater Attendance: <span id="attendanceCount">0</span></div>
+                    </li>
+                    <li>
+                        <div class="f-8">WFO Quaterly % : <span id="WfoQuaterPer"> 0.00 %</span></div>
+                    </li>
+                    <li class="f-8" id="QP"><b>Result</b> : </li>
+                </ul>
+            </div>
+            <div class="sweet-box">
+                <h2 class="text-center f-8-special">WFO status</h2>
+                <label for="monthSelect1" class="form-label f-8">Select Month:</label>
+                <select id="monthSelect1" class="form-select f-8 text-center">
+                    <option value="" disabled selected>Select Month</option>
+                    <option value="0">January</option>
+                    <option value="1">February</option>
+                    <option value="2">March</option>
+                    <option value="3">April</option>
+                    <option value="4">May</option>
+                    <option value="5">June</option>
+                    <option value="6">July</option>
+                    <option value="7">August</option>
+                    <option value="8">September</option>
+                    <option value="9">October</option>
+                    <option value="10">November</option>
+                    <option value="11">December</option>
+                </select>
+
+                <p class="f-5-special mt-2">Here are your results:</p>
+                <ul>
+                    <li>
+                        <div class="f-8">Monthly Attendance: <span id="attendanceCount1">0</span></div>
+                    </li>
+                    <li>
+                        <div class="f-8">WFO monthly % : <span id="WhoMonthPer"> 0.00 %</span></div>
+                    </li>
+                    <!-- <li>Result 3: 78%</li> -->
+                </ul>
+            </div>
+        </div>
     </div>
     <div class="container mt-5 d-flex justify-content-center border-bottom">
         <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item" role="presentation">
-                <button class="nav-link active f-9" id="tab1" data-content="main1" type="button">Target Performance
+                <button class="nav-link active f-8" id="tab1" data-content="main1" type="button">Target Performance
                     Bonus</button>
             </li>
             <li class="nav-item" role="presentation">
-                <button class="nav-link f-9" id="tab2" data-content="main2" type="button">Consumed WFH</button>
+                <button class="nav-link f-8" id="tab2" data-content="main2" type="button">Consumed WFH</button>
             </li>
         </ul>
     </div>
 
-    <main id="main1" class="content-section mt-4">
+    <main id="main1" class="content-section">
         <div id="parentContainer" class="container mt-5 mb-10">
             <div class="form-container">
-                <h2 class="mb-4">Enter the Details</h2>
+                <h2 class="mb-4 f-8-special">Enter the Details</h2>
                 <form>
                     <div class="mb-3">
-                        <label for="inputName" class="form-label">Select Quater</label>
-                        <select id="inputName" class="form-select" required>
+                        <label for="inputName" class="form-label f-8-special">Select Quater</label>
+                        <select id="inputName" class="form-select f-8-special" required>
                             <option value="" disabled selected>Select a month</option>
                             <option value="1-3">Jan - Mar</option>
                             <option value="4-6">Apr - June</option>
@@ -128,8 +181,8 @@
                         </select>
                     </div>
                     <div class="mb-3">
-                        <label for="inputEmail" class="form-label">Select Target Performance bonus</label>
-                        <select id="inputEmail" class="form-select" required>
+                        <label for="inputEmail" class="form-label f-8-special">Select Target Performance bonus</label>
+                        <select id="inputEmail" class="form-select f-8-special" required>
                             <option value="" disabled selected>Select a percentage</option>
                             <option value="85">100%</option>
                             <option value="75">75%</option>
@@ -137,10 +190,10 @@
                             <option value="0">0</option>
                         </select>
                     </div>
-                    <button id="btn" class="btn btn-primary">Calculate</button>
+                    <button id="btn" class="btn btn-primary f-8-special">Calculate</button>
                 </form>
             </div>
-            <div id="result" class="alert alert-info mt-5 border px-2" role="alert">
+            <div id="result" class="alert alert-info mt-5 border px-2 f-8-special" role="alert">
                 Result :
             </div>
         </div>
