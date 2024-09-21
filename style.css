@@ -245,4 +245,8 @@ main {
     .f-8-special{
         font-size: 0.9rem !important   ;
     }
+    .f-column{
+        /* flex-direction: column  ; */
+        flex-wrap: wrap;
+    }
 }
