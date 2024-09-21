@@ -32,6 +32,9 @@
                         <a class="nav-link" href="index.html">Home</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="calculate.html">Calculate</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="aboutMe.html">About Me</a>
                     </li>
                     <li class="nav-item">
@@ -42,7 +45,7 @@
         </div>
     </nav>
 
-    <div class="container mt-5 d-flex justify-content-center border-bottom">
+    <!-- <div class="container mt-5 d-flex justify-content-center border-bottom">
         <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item" role="presentation">
                 <button class="nav-link active f-9" id="tab1" data-content="main1" type="button">Target Performance
@@ -55,113 +58,41 @@
                 <button class="nav-link f-9" id="tab1" data-content="main3" type="button">Attendance</button>
             </li>
         </ul>
-    </div>
+    </div> -->
+
+
 
     <main id="main1" class="content-section mt-4">
-        <div id="parentContainer" class="container mt-5 mb-10">
-            <div class="form-container">
-                <h2 class="mb-4">Enter the Details</h2>
-                <form>
-                    <div class="mb-3">
-                        <label for="inputName" class="form-label">Select Quater</label>
-                        <select id="inputName" class="form-select" required>
-                            <option value="" disabled selected>Select a month</option>
-                            <option value="1-3">Jan - Mar</option>
-                            <option value="4-6">Apr - June</option>
-                            <option value="7-9">July - Sept</option>
-                            <option value="10-12">Oct - Dec</option>
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label for="inputEmail" class="form-label">Select Target Performance bonus</label>
-                        <select id="inputEmail" class="form-select" required>
-                            <option value="" disabled selected>Select a percentage</option>
-                            <option value="85">100%</option>
-                            <option value="75">75%</option>
-                            <option value="60">50%</option>
-                            <option value="0">0</option>
-                        </select>
-                    </div>
-                    <button id="btn" class="btn btn-primary">Calculate</button>
-                </form>
-            </div>
-            <div id="result" class="alert alert-info mt-5 border px-2" role="alert">
-                Result :
-            </div>
-        </div>
-    </main>
+        <div class="container m-auto">
 
-    <main id="main2" class="content-section mt-4" style="display: none;">
-        <div id="parentContainer1" class="container mt-5 mb-10">
-            <div class="form-container">
-                <h2 class="mb-4">Enter consumed WFH</h2>
-                <form>
-                    <div class="mb-3">
-                        <label for="inputName1" class="form-label">Select Quater</label>
-                        <select id="inputName1" class="form-select" required>
-                            <option value="" disabled selected>Select a month</option>
-                            <option value="1-3">Jan - Mar</option>
-                            <option value="4-6">Apr - June</option>
-                            <option value="7-9">July - Sept</option>
-                            <option value="10-12">Oct - Dec</option>
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label for="inputEmail1" class="form-label">Select Target Performance bonus</label>
-                        <select id="inputEmail1" class="form-select" required>
-                            <option value="" disabled selected>Select a percentage</option>
-                            <option value="85">100%</option>
-                            <option value="75">75%</option>
-                            <option value="60">50%</option>
-                            <option value="0">0</option>
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label for="daysConsumed" class="form-label">WFH Consumed</label>
-                        <input id="daysConsumed" type="number" class="form-control"
-                            placeholder="Days Consumed this quater" aria-label="Username"
-                            aria-describedby="basic-addon1">
-                    </div>
-                    <button id="btn1" class="btn btn-primary">Calculate</button>
-                </form>
-            </div>
-            <div id="result1" class="alert alert-info mt-5 border px-2" role="alert">
-                Result :
-            </div>
-        </div>
-    </main>
+                <div class="calendar-controls">
+                    <label for="monthSelect">Select Month:</label>
+                    <select id="monthSelect">
+                        <option value="0">January</option>
+                        <option value="1">February</option>
+                        <option value="2">March</option>
+                        <option value="3">April</option>
+                        <option value="4">May</option>
+                        <option value="5">June</option>
+                        <option value="6">July</option>
+                        <option value="7">August</option>
+                        <option value="8">September</option>
+                        <option value="9">October</option>
+                        <option value="10">November</option>
+                        <option value="11">December</option>
+                    </select>
 
-    <main id="main3" class="content-section mt-4">
-        <div class="container">
+                    <label for="yearSelect">Select Quarter-Year:</label>
+                    <select id="yearSelect">
+                        <option value="2024">2024</option>
+                        <option value="2025" disabled>2025</option>
+                        <option value="2026" disabled>2026</option>
+                    </select>
+                </div>
 
-            <div class="calendar-controls">
-                <label for="monthSelect">Select Month:</label>
-                <select id="monthSelect">
-                    <option value="0">January</option>
-                    <option value="1">February</option>
-                    <option value="2">March</option>
-                    <option value="3">April</option>
-                    <option value="4">May</option>
-                    <option value="5">June</option>
-                    <option value="6">July</option>
-                    <option value="7">August</option>
-                    <option value="8">September</option>
-                    <option value="9">October</option>
-                    <option value="10">November</option>
-                    <option value="11">December</option>
-                </select>
-
-                <label for="yearSelect">Select Quarter-Year:</label>
-                <select id="yearSelect">
-                    <option value="2024">2024</option>
-                    <option value="2025" disabled>2025</option>
-                    <option value="2026" disabled>2026</option>
-                </select>
-            </div>
-
-            <!-- Calendar will be displayed here -->
-            <div id="calendar"></div>
-            <div>Total Attendance: <span id="attendanceCount"></span></div>
+                <!-- Calendar will be displayed here -->
+                <div id="calendar"></div>
+                <div>Total Attendance: <span id="attendanceCount"></span></div>
         </div>
     </main>
 
