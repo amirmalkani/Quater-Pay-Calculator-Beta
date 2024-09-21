@@ -28,9 +28,9 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // Initialize calendar when DOM is loaded
-  if (window.location.href.includes("index.html")) {
+  //if (window.location.href.includes("index.html")) {
     initCalendar();
-  }
+  //}
   // main3.style.display = "none"; // this is added because when the dom was loaded it was appearin in the main1 tab
 });
 
