@@ -135,6 +135,90 @@ main {
     }
 }
 
+
+/* Calendar Styles */
+#calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    margin-top: 10px;
+}
+  
+#calendar div {
+    padding: 10px;
+    background-color: #f1f1f1;
+    text-align: center;
+    cursor: pointer;
+}
+  
+  #calendar div.attended {
+    background-color: #4caf50;
+    color: white;
+  }
+  
+  .calendar-controls {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+   
+  .calendar-controls label {
+    margin-right: 5px;
+  }
+
+  .calendar-controls select{
+    width: fit-content;
+}
+
+.weekend {
+    background-color: red; /* Red background for weekends */
+    color: white; /* White text color for better contrast */
+    cursor: not-allowed; /* Prevent marking attendance */
+}
+
+.f-8{
+    font-size: 0.8rem !important;
+}
+
+.sweet-box {
+    background-color: #e0f7fa; /* Light blue background */
+    border: 2px solid #b2ebf2; /* Slightly darker blue border */
+    border-radius: 15px; /* Rounded corners */
+    padding: 20px; /* Padding inside the box */
+    width: 300px; /* Width of the box */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for a floating effect */
+    font-family: Arial, sans-serif; /* Font style */
+  }
+  
+  .sweet-box h2 {
+    color: #00796b; /* Dark teal for headings */
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
+  
+  .sweet-box p {
+    color: #004d40; /* Darker teal for paragraph text */
+    font-size: 1rem;
+  }
+  
+  .sweet-box ul {
+    list-style-type: none; /* Remove bullets */
+    padding: 0;
+  }
+  
+  .sweet-box ul li {
+    background-color: #b2ebf2; /* Slightly darker light blue */
+    margin: 5px 0; /* Space between results */
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 1rem;
+    color: #004d40; /* Darker text for readability */
+  }
+
+  .w-fit{
+    width: fit-content !important;
+  }
+  
 @media (max-width: 768px) {
     .contact-container {
         width: 90%;
@@ -152,41 +236,13 @@ main {
         line-height: 40px;
         font-size: 1.2rem;
     }
-}
-
-/* Calendar Styles */
-#calendar {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 5px;
-    margin-top: 10px;
-  }
-  
-  #calendar div {
-    padding: 10px;
-    background-color: #f1f1f1;
-    text-align: center;
-    cursor: pointer;
-  }
-  
-  #calendar div.attended {
-    background-color: #4caf50;
-    color: white;
-  }
-  
-  .calendar-controls {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
-  }
-  
-  
-
-  .calendar-controls label {
-    margin-right: 5px;
-  }
-  .weekend {
-    background-color: red; /* Red background for weekends */
-    color: white; /* White text color for better contrast */
-    cursor: not-allowed; /* Prevent marking attendance */
+    .f-8{
+        font-size: 0.6rem !important   ;
+    }
+    .f-5-special{
+        font-size: 0.7rem !important;
+    }
+    .f-8-special{
+        font-size: 0.9rem !important   ;
+    }
 }
