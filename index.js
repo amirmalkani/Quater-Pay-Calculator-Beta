@@ -225,7 +225,6 @@ function initCalendar() {
             localStorage.setItem("attendance", JSON.stringify(attendance));
             dayElement.classList.add("attended"); // Update the class
             updateAttendanceCount(selectedMonth, selectedYear);
-            debugger;
           }
         });
       }
@@ -258,15 +257,17 @@ function initAttendanceCount(selectedQuater, selectedYear) {
   let attendance = JSON.parse(localStorage.getItem("attendance")) || {};
   if (attendance != null) {
     selectedYear = Number(selectedYear);
-    if(selectedQuater.includes("-")){
-    updateAttendanceCountQuaterly(first, selectedYear); 
-    }else{
-      updateAttendanceCount(selectedQuater,selectedYear)
+    if (selectedQuater.includes("-")) {
+      updateAttendanceCountQuaterly(first, selectedYear);
+    } else {
+      updateAttendanceCount(selectedQuater, selectedYear);
     }
   }
   function updateAttendanceCountQuaterly(selectedMonth, selectedYear) {
     let totalAttendance;
     let totalAttendanceCount = 0;
+    let resetSelectedMonth = selectedMonth;
+
     selectedMonth -= 1;
     for (let i = 0; i < 3; i++) {
       // const element = array[index];
@@ -282,11 +283,38 @@ function initAttendanceCount(selectedQuater, selectedYear) {
       totalAttendanceCount += totalAttendance;
     }
     attendanceCount.textContent = totalAttendanceCount;
-    updateWfoPercenQuater(selectedMonth,totalAttendanceCount)
+    selectedMonth = resetSelectedMonth;
+    updateWfoPercenQuater(selectedMonth, totalAttendanceCount);
   }
-  function updateWfoPercenQuater(firstValue,totalAttendanceCount){
-    let totalQuaterWorkingDays = quaterCall(first);
-    WfoQuaterPer.textContent = (totalAttendanceCount/totalQuaterWorkingDays * 100).toFixed(2) + "%";
+  function updateWfoPercenQuater(firstValue, totalAttendanceCount) {
+    let totalQuaterWorkingDays = quaterCall(firstValue);
+    const WfoQuater = (totalAttendanceCount / totalQuaterWorkingDays * 100).toFixed(2) ;
+    console.log(WfoQuater)
+    WfoQuaterPer.textContent =
+      ((totalAttendanceCount / totalQuaterWorkingDays) * 100).toFixed(2) + "%";
+      if (WfoQuater >= 85) {
+        if(totalEligibleQuaterpay.classList.contains('alert-danger')){
+          totalEligibleQuaterpay.classList.remove('alert-danger')
+        }
+        totalEligibleQuaterpay.classList.add('alert-success');
+        totalEligibleQuaterpay.innerHTML = `Result : Congratulation You are eligible for <b>100%</b> Quater Pay`;
+        QP.innerHTML = `<b>Result</b> : <i>Eligible for <b>100%</b> Quater Pay</i>`;
+      }else if(WfoQuater >= 75 && WfoQuater < 85){
+        totalEligibleQuaterpay.innerHTML = `Result : Great! You are eligible for <b>75%</b> Quater Pay`;
+        QP.innerHTML = `<b>Result</b> : <i>Eligible for <b>75%</b> Quater Pay</i>`;
+        totalEligibleQuaterpay.classList.add('alert-success');
+      }else if(WfoQuater >= 60 && WfoQuater < 75){
+        totalEligibleQuaterpay.innerHTML = `Result : hmm! You are eligible for only <b>50%</b> Quater Pay`;
+        QP.innerHTML = `<b>Result</b> : <i>Eligible for <b>50%</b> Quater Pay</i>`;
+        totalEligibleQuaterpay.classList.add('alert-success');
+      }else{
+        if(totalEligibleQuaterpay.classList.contains('alert-success')){
+          totalEligibleQuaterpay.classList.remove('alert-success')
+        }
+        totalEligibleQuaterpay.innerText = `Result : Sorry! You are not eligible for Quater Pay`;
+        QP.innerHTML = `<b>Result</b> : <i>You are not eligible for Quater Pay</>`;
+        totalEligibleQuaterpay.classList.add('alert-danger','text-center');
+      }
   }
   function updateAttendanceCount(selectedMonth, selectedYear) {
     selectedMonth = Number(selectedMonth);
@@ -300,13 +328,17 @@ function initAttendanceCount(selectedQuater, selectedYear) {
     }).length;
 
     attendanceCount1.textContent = totalAttendance;
-    updateWfoPercenMonth(selectedMonth,totalAttendance,selectedYear);
+    updateWfoPercenMonth(selectedMonth, totalAttendance, selectedYear);
   }
-  function updateWfoPercenMonth(selectedMonth,totalAttendance,selectedYear){
-    let totalMonthWorkingDays = getWorkingDaysInMonth(selectedYear, selectedMonth);
+  function updateWfoPercenMonth(selectedMonth, totalAttendance, selectedYear) {
+    selectedMonth += 1;
+    let totalMonthWorkingDays = getWorkingDaysInMonth(
+      selectedYear,
+      selectedMonth
+    );
     // console.log(new Date().getFullYear())
-    debugger
-    WhoMonthPer.textContent = (totalAttendance/totalMonthWorkingDays * 100).toFixed(2) + "%";
+    // debugger
+    WhoMonthPer.textContent =
+      ((totalAttendance / totalMonthWorkingDays) * 100).toFixed(2) + "%";
   }
-  
 }
