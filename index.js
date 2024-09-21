@@ -28,42 +28,60 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // Initialize calendar when DOM is loaded
-  initCalendar();
-  main3.style.display = "none"; // this is added because when the dom was loaded it was appearin in the main1 tab
+  if (window.location.href.includes("index.html")) {
+    initCalendar();
+  }
+  // main3.style.display = "none"; // this is added because when the dom was loaded it was appearin in the main1 tab
 });
 
 // Button event handlers for the form
-btn.addEventListener("click", (e) => {
-  e.preventDefault();
-  result = document.getElementById("result");
-  if (quater.value != "" && percentage.value != "") {
-    let firstValue = getFirstValue(quater.value);
-    totalDaysFinal = quaterCall(firstValue);
-    let totalWFO = targeDays(totalDaysFinal, percentage.value);
-    addResultText(totalWFO, totalDaysFinal);
-  } else {
-    addResultText();
-  }
-});
+if (window.location.href.includes("calculate.html")) {
+  btn.addEventListener("click", (e) => {
+    e.preventDefault();
+    result = document.getElementById("result");
+    if (quater.value != "" && percentage.value != "") {
+      let firstValue = getFirstValue(quater.value);
+      totalDaysFinal = quaterCall(firstValue);
+      let totalWFO = targeDays(totalDaysFinal, percentage.value);
+      addResultText(totalWFO, totalDaysFinal);
+    } else {
+      addResultText();
+    }
+  });
 
-btn1.addEventListener("click", (e) => {
-  e.preventDefault();
-  result = document.getElementById("result1");
-  if (
-    quater1.value != "" &&
-    percentage1.value != "" &&
-    daysConsumed.value != ""
-  ) {
-    let firstValue = getFirstValue(quater1.value);
-    totalDaysFinal = quaterCall(firstValue);
-    let totalWFO = targeDays(totalDaysFinal, percentage1.value);
-    let checkAvail = checkAvaiWFH(totalWFO, totalDaysFinal);
-    addResultText1(checkAvail, daysConsumed.value);
-  } else {
-    addResultText();
-  }
-});
+  btn1.addEventListener("click", (e) => {
+    e.preventDefault();
+    result = document.getElementById("result1");
+    if (
+      quater1.value != "" &&
+      percentage1.value != "" &&
+      daysConsumed.value != ""
+    ) {
+      let firstValue = getFirstValue(quater1.value);
+      totalDaysFinal = quaterCall(firstValue);
+      let totalWFO = targeDays(totalDaysFinal, percentage1.value);
+      let checkAvail = checkAvaiWFH(totalWFO, totalDaysFinal);
+      addResultText1(checkAvail, daysConsumed.value);
+    } else {
+      addResultText();
+    }
+  });
 
+  monthSelect.addEventListener("change", function () {
+    // Get the selected value
+    // attendanceCount.textContent = "";
+    const yearSelect = document.getElementById("yearSelect").value;
+    const selectedQuater = this.value;
+    initAttendanceCount(selectedQuater, yearSelect);
+  });
+  monthSelect1.addEventListener("change", function () {
+    // Get the selected value
+    const yearSelect = document.getElementById("yearSelect").value;
+    const selectedQuater = this.value;
+    // debugger
+    initAttendanceCount(selectedQuater, yearSelect);
+  });
+}
 function checkAvaiWFH(totalWFO, totalDaysFinal) {
   return totalDaysFinal - totalWFO;
 }
@@ -93,7 +111,7 @@ function targeDays(totalDays, targetPercentage) {
 function quaterCall(firstValue) {
   let totalDays = 0;
   for (let i = 0; i < 3; i++) {
-    totalDays += getWorkingDaysInMonth(2024, firstValue);
+    totalDays += getWorkingDaysInMonth(new Date().getFullYear(), firstValue);
     firstValue++;
   }
   return totalDays;
@@ -132,7 +150,7 @@ function initCalendar() {
 
   // Retrieve attendance data from local storage
   let attendance = JSON.parse(localStorage.getItem("attendance")) || {};
-
+  // debugger
   // Event listeners for month and year selection changes
   monthSelect.addEventListener("change", renderCalendar);
   yearSelect.addEventListener("change", renderCalendar);
@@ -148,7 +166,7 @@ function initCalendar() {
     // Get number of days in the selected month
     const daysInMonth = new Date(selectedYear, selectedMonth + 1, 0).getDate();
     const firstDayOfMonth = new Date(selectedYear, selectedMonth, 1).getDay(); // 0 = Sunday, 6 = Saturday
-
+    // debugger
     // Create empty divs for leading empty days
     for (let i = 0; i < firstDayOfMonth; i++) {
       const emptyElement = document.createElement("div");
@@ -172,14 +190,14 @@ function initCalendar() {
         dayElement.title = "Attendance cannot be marked"; // Add tooltip
       } else {
         const attendanceKey = `${selectedYear}-${selectedMonth}-${day}`;
+        if (attendanceKey == "2024-0-31") {
+          // debugger
+        }
         if (attendance[attendanceKey]) {
-          debugger
           dayElement.classList.add("attended");
         }
-        // debugger;
         // Toggle attendance on click for weekdays only
         dayElement.addEventListener("click", () => {
-          // debugger
           const attended = attendance[attendanceKey];
 
           // If the user is trying to remove attendance, show confirmation modal
@@ -207,6 +225,7 @@ function initCalendar() {
             localStorage.setItem("attendance", JSON.stringify(attendance));
             dayElement.classList.add("attended"); // Update the class
             updateAttendanceCount(selectedMonth, selectedYear);
+            debugger;
           }
         });
       }
@@ -227,10 +246,67 @@ function initCalendar() {
         attendance[key]
       );
     }).length;
-
     attendanceCount.textContent = totalAttendance;
   }
 
   // Initial render of the calendar when the page loads
   renderCalendar();
+}
+
+function initAttendanceCount(selectedQuater, selectedYear) {
+  const first = getFirstValue(selectedQuater);
+  let attendance = JSON.parse(localStorage.getItem("attendance")) || {};
+  if (attendance != null) {
+    selectedYear = Number(selectedYear);
+    if(selectedQuater.includes("-")){
+    updateAttendanceCountQuaterly(first, selectedYear); 
+    }else{
+      updateAttendanceCount(selectedQuater,selectedYear)
+    }
+  }
+  function updateAttendanceCountQuaterly(selectedMonth, selectedYear) {
+    let totalAttendance;
+    let totalAttendanceCount = 0;
+    selectedMonth -= 1;
+    for (let i = 0; i < 3; i++) {
+      // const element = array[index];
+      totalAttendance = Object.keys(attendance).filter((key) => {
+        const [year, month, day] = key.split("-");
+        return (
+          parseInt(month) === selectedMonth &&
+          parseInt(year) === selectedYear &&
+          attendance[key]
+        );
+      }).length;
+      selectedMonth++;
+      totalAttendanceCount += totalAttendance;
+    }
+    attendanceCount.textContent = totalAttendanceCount;
+    updateWfoPercenQuater(selectedMonth,totalAttendanceCount)
+  }
+  function updateWfoPercenQuater(firstValue,totalAttendanceCount){
+    let totalQuaterWorkingDays = quaterCall(first);
+    WfoQuaterPer.textContent = (totalAttendanceCount/totalQuaterWorkingDays * 100).toFixed(2) + "%";
+  }
+  function updateAttendanceCount(selectedMonth, selectedYear) {
+    selectedMonth = Number(selectedMonth);
+    const totalAttendance = Object.keys(attendance).filter((key) => {
+      const [year, month, day] = key.split("-");
+      return (
+        parseInt(month) === selectedMonth &&
+        parseInt(year) === selectedYear &&
+        attendance[key]
+      );
+    }).length;
+
+    attendanceCount1.textContent = totalAttendance;
+    updateWfoPercenMonth(selectedMonth,totalAttendance,selectedYear);
+  }
+  function updateWfoPercenMonth(selectedMonth,totalAttendance,selectedYear){
+    let totalMonthWorkingDays = getWorkingDaysInMonth(selectedYear, selectedMonth);
+    // console.log(new Date().getFullYear())
+    debugger
+    WhoMonthPer.textContent = (totalAttendance/totalMonthWorkingDays * 100).toFixed(2) + "%";
+  }
+  
 }
